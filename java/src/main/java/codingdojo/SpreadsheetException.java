@@ -8,21 +8,21 @@ import java.util.List;
  * happens when evaluating the calculation formulas in a
  * SpreadsheetWorkbook
  */
-public class SpreadsheetException extends Exception {
+class SpreadsheetException extends Exception {
     private List<String> cells;
     private String token;
 
-    public SpreadsheetException(String message, List<String> cells, String token) {
+    SpreadsheetException(String message, List<String> cells, String token) {
         super(message);
         this.cells = cells;
         this.token = token;
     }
 
-    public List<String> getCells() {
+    List<String> getCells() {
         return cells;
     }
 
-    public String getToken() {
+    String getToken() {
         return token;
     }
 }

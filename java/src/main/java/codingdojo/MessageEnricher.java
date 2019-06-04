@@ -1,9 +1,8 @@
 package codingdojo;
 
+class MessageEnricher {
 
-public class MessageEnricher {
-
-    public ErrorResult enrichError(SpreadsheetWorkbook spreadsheetWorkbook, Exception e) {
+    ErrorResult enrichError(SpreadsheetWorkbook spreadsheetWorkbook, Exception e) {
 
         String formulaName = spreadsheetWorkbook.getFormulaName();
 
@@ -16,7 +15,7 @@ public class MessageEnricher {
             return new ErrorResult(formulaName, error, spreadsheetWorkbook.getPresentation());
         }
         if ("Object reference not set to an instance of an object".equals(e.getMessage())
-                && stackTraceContains(e,"vLookup")) {
+                && stackTraceContains(e)) {
             return new ErrorResult(formulaName, "Missing Lookup Table", spreadsheetWorkbook.getPresentation());
         }
         if ("No matches found".equals(e.getMessage())) {
@@ -29,9 +28,9 @@ public class MessageEnricher {
         return new ErrorResult(formulaName, e.getMessage(), spreadsheetWorkbook.getPresentation());
     }
 
-    private boolean stackTraceContains(Exception e, String message) {
+    private boolean stackTraceContains(Exception e) {
         for (StackTraceElement ste : e.getStackTrace()) {
-            if (ste.getMethodName().contains(message)) {
+            if (ste.getMethodName().contains("vLookup")) {
                 return true;
             }
         }

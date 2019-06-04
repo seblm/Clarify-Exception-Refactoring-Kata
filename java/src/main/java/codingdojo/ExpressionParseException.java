@@ -1,11 +1,7 @@
 package codingdojo;
 
-public class ExpressionParseException extends Exception {
-    public ExpressionParseException() {
-        this("Expression parsing problem");
-    }
-
-    public ExpressionParseException(String message) {
-        super(message);
+class ExpressionParseException extends Exception {
+    ExpressionParseException() {
+        super("Expression parsing problem");
     }
 }
