@@ -100,4 +100,13 @@ class MessageEnricherTest {
         assertEquals("No match found for token [some token] related to formula '" + worksheet.getFormulaName() + "'.", actual.getMessage());
     }
 
+    @Test
+    void should_returns_ErrorResult_with_custom_message_for_a_SpreadsheetException_with_Missing_Formula_message() {
+        Exception e = new SpreadsheetException("Missing Formula", asList("B2", "C4"), "some token");
+
+        ErrorResult actual = enricher.enrichError(worksheet, e);
+
+        assertEquals("Invalid expression found in tax formula [" + worksheet.getFormulaName() + "]. Check for merged cells near [B2, C4]", actual.getMessage());
+    }
+
 }

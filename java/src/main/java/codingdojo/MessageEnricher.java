@@ -15,6 +15,8 @@ class MessageEnricher {
             error = "Missing Lookup Table";
         else if ("No matches found".equals(e.getMessage()) && e instanceof SpreadsheetException)
             error = "No match found for token [" + ((SpreadsheetException) e).getToken() + "] related to formula '" + formulaName + "'.";
+        else if ("Missing Formula".equals(e.getMessage()) && e instanceof SpreadsheetException)
+            error = "Invalid expression found in tax formula [" + spreadsheetWorkbook.getFormulaName() + "]. Check for merged cells near " + ((SpreadsheetException) e).getCells();
         else
             error = e.getMessage();
         return new ErrorResult(formulaName, error, spreadsheetWorkbook.getPresentation());
